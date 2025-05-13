@@ -13,7 +13,7 @@ setup(
     name = 'Summer Mini Project',
     packages = find_packages(),
     version = '0.1.0',
-    description = 'This Machine Learning project focuses on solving real world problem',
+    description = 'This Machine Learning project focuses on solving real world problems',
     author = 'Pandu',
     author_email = 'kottepandurangareddy@gmail.com',
     install_requires = get_requirements('requirements.txt')
