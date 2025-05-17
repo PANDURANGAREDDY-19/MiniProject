@@ -16,6 +16,7 @@ setup(
     description = 'This Machine Learning project focuses on solving real world problems',
     author = 'Pandu',
     author_email = 'kottepandurangareddy@gmail.com',
-    install_requires = get_requirements('requirements.txt')
+    install_requires = get_requirements('requirements.txt'),
+    
 )
 
