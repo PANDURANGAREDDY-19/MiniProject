@@ -109,7 +109,6 @@ class ModelTrainer:
                 )
                 grid.fit(X_train, Y_train)
                 best_model = grid.best_estimator_
-                print(f"Best parameters: {grid.best_params_}")
                 predicted = best_model.predict(X_test)
 
                 f1_Score_value = f1_score(Y_test,predicted)
