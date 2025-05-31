@@ -49,8 +49,46 @@ class ModelTrainer:
                     verbose=0
                 ),
             }
-
-            model_report : dict = evaluate_model(X_train = X_train,Y_train = Y_train,X_test = X_test,Y_test = Y_test,models=models)
+            parameters = {
+                "Random Forest Classifier": {
+                    "n_estimators": [100, 200, 300],
+                    "max_depth": [None, 10, 20, 30],
+                    "min_samples_split": [2, 5, 10]
+                    },
+                "Logistic Regression": {
+                    "C": [0.01, 0.1, 1, 10, 100],
+                    "solver": ["liblinear", "lbfgs"]
+                    },
+                "Decision Tree Classifier": {
+                    "criterion": ["gini", "entropy"],
+                    "max_depth": [None, 10, 20, 30],
+                    "min_samples_split": [2, 5, 10]
+                    },
+                "AdaBoost Classifier": {
+                    "n_estimators": [50, 100, 200],
+                    "learning_rate": [0.01, 0.1, 1.0]
+                    },
+                "K-Neighbors Classifier": {
+                    "n_neighbors": [3, 5, 7, 9],
+                    "weights": ["uniform", "distance"]
+                    },
+                "Gradient Boost Classifier": {
+                    "n_estimators": [100, 200],
+                    "learning_rate": [0.01, 0.1, 0.2],
+                    "max_depth": [3, 5, 7]
+                    },
+                "XGB Classifier": {
+                    "learning_rate": [0.01, 0.1, 0.2],
+                    "n_estimators": [100, 200],
+                    "max_depth": [3, 5, 7]
+                    },
+                "CatBoost Classifier": {
+                    "learning_rate": [0.01, 0.1, 0.2],
+                    "iterations": [50, 100, 200],
+                    "depth": [4, 6, 8]
+                    }
+            }
+            model_report : dict = evaluate_model(X_train = X_train,Y_train = Y_train,X_test = X_test,Y_test = Y_test,models=models,parameters=parameters)
             best_model_score = max(sorted(model_report.values()))
             best_model_name = list(model_report.keys())[
                 list(model_report.values()).index(best_model_score)
@@ -61,6 +99,7 @@ class ModelTrainer:
             logging.info("Best Model found for dataset")
 
             save_object(file_path=self.ModelTrainerConfig.trained_model_file_path,obj=best_model)
+            best_model.fit(X_train,Y_train)
             predicted = best_model.predict(X_test)
 
             f1_Score_value = f1_score(Y_test,predicted)
