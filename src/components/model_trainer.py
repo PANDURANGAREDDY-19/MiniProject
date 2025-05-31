@@ -13,6 +13,7 @@ from sklearn.metrics import f1_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
+from sklearn.model_selection import GridSearchCV
 
 from src.exception import CustomException
 from src.logger import logging
@@ -99,10 +100,19 @@ class ModelTrainer:
             logging.info("Best Model found for dataset")
 
             save_object(file_path=self.ModelTrainerConfig.trained_model_file_path,obj=best_model)
-            best_model.fit(X_train,Y_train)
-            predicted = best_model.predict(X_test)
+            if best_model_name in parameters:
+                grid = GridSearchCV(
+                estimator=models[best_model_name],
+                param_grid=parameters[best_model_name],
+                cv=5,
+                scoring='f1'
+                )
+                grid.fit(X_train, Y_train)
+                best_model = grid.best_estimator_
+                print(f"Best parameters: {grid.best_params_}")
+                predicted = best_model.predict(X_test)
 
-            f1_Score_value = f1_score(Y_test,predicted)
+                f1_Score_value = f1_score(Y_test,predicted)
             return f1_Score_value
 
         except Exception as e:
