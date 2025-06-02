@@ -27,19 +27,25 @@
 => HeartDisease: output class [1: heart disease, 0: Normal]
 
 ### Prerequisites
-~ Anaconda prompt for Setting up your python environment
-~ To create your environment manually follow the following steps:
+##### ~ Anaconda prompt for Setting up your python environment
+##### ~ To create your environment manually follow the following steps:
     -> Open anaconda prompt
+
     -> Go to your Project directory
+
     -> type the following code
+
         conda create -p name_of_your_environment python=3.13 -y { You can create with your python version}
-~ To activate your environment go to vs code and open your Project folder
+##### ~ To activate your environment go to vs code and open your Project folder
     -Then open Terminal and open the Command Prompt
+
     -type the following code to activate your environment
+
         -> conda activate name_of_your_environment/
-~ Python installed with version 3.8 or higher for development
-~ pip installed in the Device for installing required libraries
-~ Install the required libraries in the environment by using the following command
+##### ~ Python installed with version 3.8 or higher for development
+##### ~ pip installed in the Device for installing required libraries
+##### ~ Install the required libraries in the environment by using the following command
     ->pip install -r requirements.txt
+    
   or install teh packages manually by checking with the requirements.txt file for packages/libraries
-~ 
+##### ~ 
