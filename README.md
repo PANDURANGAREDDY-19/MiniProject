@@ -43,8 +43,6 @@ This project implements a machine learning pipeline to analyze various health me
 │   ├── pipeline/                # Prediction pipeline
 │   │   └── predict_pipeline.py
 │   └── exception.py             # Custom exception handling
-├── static/
-│   └── css/                     # CSS stylesheets
 ├── templates/                   # HTML templates
 │   ├── home.html
 │   └── index.html
@@ -57,7 +55,7 @@ This project implements a machine learning pipeline to analyze various health me
 
 ### Prerequisites
 
-- Python 3.13
+- Python 3.8 or higher
 - Anaconda (recommended) or pip package manager
 
 ### Environment Setup
@@ -106,7 +104,7 @@ pip install -r requirements.txt
 
 2. Open your web browser and navigate to:
    ```
-   http://127.0.0.1:5000/
+   http://127.0.0.1:1910/
    ```
 
 3. Enter the required health parameters in the form and click "Calculate Risk" to get a prediction.
