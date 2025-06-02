@@ -45,8 +45,6 @@ This project implements a machine learning pipeline to analyze various health me
 │ ├── exception.py # Custom exception handling
 │ ├── logger.py # Logging functionality
 │ └── utils.py # Utility functions
-├── static/
-│ └── css/ # CSS stylesheets
 ├── templates/ # HTML templates
 │ ├── home.html
 │ └── index.html
