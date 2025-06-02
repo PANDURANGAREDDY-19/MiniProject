@@ -31,24 +31,28 @@ This project implements a machine learning pipeline to analyze various health me
 
 ```
 ├── data/
-│   └── heart.csv                # Dataset file
+│ └── heart.csv # Dataset file
 ├── notebook/
-│   ├── EDA.ipynb                # Exploratory Data Analysis
-│   └── MODEL TRAINING.ipynb     # Model training and evaluation
+│ ├── EDA.ipynb # Exploratory Data Analysis
+│ └── MODEL TRAINING.ipynb # Model training and evaluation
 ├── src/
-│   ├── components/              # Pipeline components
-│   │   ├── data_ingestion.py
-│   │   ├── data_transformation.py
-│   │   └── model_trainer.py
-│   ├── pipeline/                # Prediction pipeline
-│   │   └── predict_pipeline.py
-│   └── exception.py             # Custom exception handling
-├── templates/                   # HTML templates
-│   ├── home.html
-│   └── index.html
-├── app.py                       # Flask application
-├── requirements.txt             # Project dependencies
-└── README.md                    # Project documentation
+│ ├── components/ # Pipeline components
+│ │ ├── data_ingestion.py
+│ │ ├── data_transformation.py
+│ │ └── model_trainer.py
+│ ├── pipeline/ # Prediction pipeline
+│ │ └── predict_pipeline.py
+│ ├── exception.py # Custom exception handling
+│ ├── logger.py # Logging functionality
+│ └── utils.py # Utility functions
+├── static/
+│ └── css/ # CSS stylesheets
+├── templates/ # HTML templates
+│ ├── home.html
+│ └── index.html
+├── app.py # Flask application
+├── requirements.txt # Project dependencies
+└── README.md # Project documentation
 ```
 
 ## Installation
