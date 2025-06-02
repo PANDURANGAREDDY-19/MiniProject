@@ -1,51 +1,144 @@
-# Machine Learning Project for Summer Vacation 
- The Goal of the Project is to identify the hidden trends between different features in the Dataset and predict or identify the possibility of heart diseases
+# Heart Disease Prediction System
 
-## Attribute Information
-=> Age: age of the patient [years] 
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Flask](https://img.shields.io/badge/Flask-2.0+-green.svg)](https://flask.palletsprojects.com/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-orange.svg)](https://scikit-learn.org/)
 
-=> Sex: sex of the patient [M: Male, F: Female] 
+A machine learning-based web application that predicts the risk of heart disease based on clinical parameters.
 
-=> ChestPainType: chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]
+## Overview
 
-=> RestingBP: resting blood pressure [mm Hg]
+This project implements a machine learning pipeline to analyze various health metrics and identify hidden trends between different features in the dataset to predict the likelihood of heart disease. The system provides an interactive web interface for users to input their health parameters and receive risk assessments.
 
-=> Cholesterol: serum cholesterol [mm/dl]
+## Dataset Features
 
-=> FastingBS: fasting blood sugar [1: if FastingBS > 120 mg/dl, 0: otherwise]
+| Feature | Description | Type |
+|---------|-------------|------|
+| Age | Age of the patient | Numeric (years) |
+| Sex | Gender of the patient | Categorical (M: Male, F: Female) |
+| ChestPainType | Type of chest pain | Categorical (TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic) |
+| RestingBP | Resting blood pressure | Numeric (mm Hg) |
+| Cholesterol | Serum cholesterol | Numeric (mm/dl) |
+| FastingBS | Fasting blood sugar | Binary (1: if > 120 mg/dl, 0: otherwise) |
+| RestingECG | Resting electrocardiogram results | Categorical (Normal, ST: ST-T wave abnormality, LVH: left ventricular hypertrophy) |
+| MaxHR | Maximum heart rate achieved | Numeric (60-202) |
+| ExerciseAngina | Exercise-induced angina | Binary (Y: Yes, N: No) |
+| Oldpeak | ST depression induced by exercise | Numeric |
+| ST_Slope | Slope of the peak exercise ST segment | Categorical (Up: upsloping, Flat: flat, Down: downsloping) |
+| HeartDisease | Target variable | Binary (1: heart disease, 0: Normal) |
 
-=> RestingECG: resting electrocardiogram results [Normal: Normal, ST: having ST-T wave abnormality (T wave inversions and/or ST elevation or depression of > 0.05 mV), LVH: showing probable or definite left ventricular hypertrophy by Estes' criteria]
+## Project Structure
 
-=> MaxHR: maximum heart rate achieved [Numeric value between 60 and 202]
+```
+├── data/
+│   └── heart.csv                # Dataset file
+├── notebook/
+│   ├── EDA.ipynb                # Exploratory Data Analysis
+│   └── MODEL TRAINING.ipynb     # Model training and evaluation
+├── src/
+│   ├── components/              # Pipeline components
+│   │   ├── data_ingestion.py
+│   │   ├── data_transformation.py
+│   │   └── model_trainer.py
+│   ├── pipeline/                # Prediction pipeline
+│   │   └── predict_pipeline.py
+│   └── exception.py             # Custom exception handling
+├── static/
+│   └── css/                     # CSS stylesheets
+├── templates/                   # HTML templates
+│   ├── home.html
+│   └── index.html
+├── app.py                       # Flask application
+├── requirements.txt             # Project dependencies
+└── README.md                    # Project documentation
+```
 
-=> ExerciseAngina: exercise-induced angina [Y: Yes, N: No]
-
-=> Oldpeak: oldpeak = ST [Numeric value measured in depression]
-
-=> ST_Slope: the slope of the peak exercise ST segment [Up: upsloping, Flat: flat, Down: downsloping]
-
-=> HeartDisease: output class [1: heart disease, 0: Normal]
+## Installation
 
 ### Prerequisites
-##### ~ Anaconda prompt for Setting up your python environment
-##### ~ To create your environment manually follow the following steps:
-    -> Open anaconda prompt
 
-    -> Go to your Project directory
+- Python 3.13
+- Anaconda (recommended) or pip package manager
 
-    -> type the following code
+### Environment Setup
 
-        conda create -p name_of_your_environment python=3.13 -y { You can create with your python version}
-##### ~ To activate your environment go to vs code and open your Project folder
-    -Then open Terminal and open the Command Prompt
+#### Using Anaconda (Recommended)
 
-    -type the following code to activate your environment
+1. Open Anaconda Prompt and navigate to your project directory:
+   ```bash
+   cd path/to/project
+   ```
 
-        -> conda activate name_of_your_environment/
-##### ~ Python installed with version 3.8 or higher for development
-##### ~ pip installed in the Device for installing required libraries
-##### ~ Install the required libraries in the environment by using the following command
-    ->pip install -r requirements.txt
-    
-  or install teh packages manually by checking with the requirements.txt file for packages/libraries
-##### ~ 
+2. Create a new conda environment:
+   ```bash
+   conda create -p venv python=3.8 -y
+   ```
+
+3. Activate the environment:
+   ```bash
+   conda activate ./venv
+   ```
+
+#### Using pip and venv
+
+1. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   ```
+
+2. Activate the environment:
+   - Windows: `venv\Scripts\activate`
+   - macOS/Linux: `source venv/bin/activate`
+
+### Installing Dependencies
+
+Install all required packages:
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+1. Start the Flask application:
+   ```bash
+   python app.py
+   ```
+
+2. Open your web browser and navigate to:
+   ```
+   http://127.0.0.1:5000/
+   ```
+
+3. Enter the required health parameters in the form and click "Calculate Risk" to get a prediction.
+
+## Model Development
+
+The project evaluates multiple classification algorithms including:
+- Random Forest
+- Logistic Regression
+- Gradient Boosting
+- XGBoost
+- CatBoost
+- SVM
+- Decision Tree
+- K-Nearest Neighbors
+- AdaBoost
+
+Models are compared using metrics such as accuracy, precision, recall, F1-score, and ROC-AUC to select the best performer for heart disease prediction.
+
+## Web Application
+
+The Flask web application provides:
+- A user-friendly interface for data input
+- Real-time prediction of heart disease risk
+- Visual presentation of results
+- Responsive design for various devices
+
+## License
+
+This project is open-source and available under the MIT License.
+
+## Acknowledgments
+
+- Dataset source: Heart Disease Dataset
+- Special thanks to all contributors and mentors who provided guidance
