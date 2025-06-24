@@ -54,13 +54,10 @@ class DatabaseHandler:
         try:
             cursor = self.conn.cursor()
             
-            # Extract data from dataframe
             data = input_data.iloc[0].to_dict()
             
-            # Current timestamp
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             
-            # Insert data into database
             cursor.execute('''
             INSERT INTO predictions (
                 timestamp, age, sex, cholesterol, chest_pain_type, 

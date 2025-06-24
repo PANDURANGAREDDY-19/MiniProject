@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory, jsonify
+from flask import Flask, request, render_template, send_from_directory
 import os
 
 from src.pipeline.predict_pipeline import CustomData
