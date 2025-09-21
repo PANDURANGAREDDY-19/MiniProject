@@ -113,6 +113,81 @@
             cursor: pointer;
             margin-left: 5px;
         }
+        
+        /* Custom Modal Styles */
+        .prediction-modal .modal-content {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .prediction-modal .modal-header {
+            border: none;
+            border-radius: 15px 15px 0 0;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .prediction-modal .modal-header.high-risk {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+        
+        .prediction-modal .modal-header.low-risk {
+            background: linear-gradient(135deg, #51cf66, #40c057);
+            color: white;
+        }
+        
+        .prediction-modal .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .prediction-modal .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .prediction-modal .modal-body {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .prediction-modal .prediction-message {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+        
+        .prediction-modal .prediction-advice {
+            font-size: 0.95rem;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        .prediction-modal .modal-footer {
+            border: none;
+            padding: 20px 30px 30px;
+            justify-content: center;
+        }
+        
+        .prediction-modal .btn-close-modal {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            padding: 10px 30px;
+            font-weight: 500;
+            border-radius: 25px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .prediction-modal .btn-close-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -246,18 +321,28 @@
                 </div>
             </form>
 
-            {% if results is defined %}
-            <div class="result-box {% if results == 1 %}result-positive{% else %}result-negative{% endif %} mt-4">
-                <i class="{% if results == 1 %}fas fa-exclamation-triangle me-2{% else %}fas fa-check-circle me-2{% endif %}"></i>
-                {% if results == 1 %}
-                    Prediction: <span>High risk of heart disease</span>
-                    <p class="mt-2 mb-0" style="font-size: 0.9rem; font-weight: normal;">Please consult with a healthcare professional for a thorough evaluation.</p>
-                {% else %}
-                    Prediction: <span>Low risk of heart disease</span>
-                    <p class="mt-2 mb-0" style="font-size: 0.9rem; font-weight: normal;">Continue maintaining a healthy lifestyle.</p>
-                {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Prediction Result Modal -->
+    <div class="modal fade prediction-modal" id="predictionModal" tabindex="-1" aria-labelledby="predictionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="w-100">
+                        <div class="modal-icon" id="modalIcon"></div>
+                        <h5 class="modal-title" id="modalTitle"></h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="prediction-message" id="modalMessage"></p>
+                    <p class="prediction-advice" id="modalAdvice"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-close-modal" data-bs-dismiss="modal">Got it!</button>
+                </div>
             </div>
-            {% endif %}
         </div>
     </div>
 
@@ -269,6 +354,39 @@
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+        
+        // Show prediction result as styled popup
+        {% if results is defined %}
+        window.onload = function() {
+            showPredictionModal({{ results }});
+        }
+        {% endif %}
+        
+        function showPredictionModal(result) {
+            const modal = document.getElementById('predictionModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalAdvice = document.getElementById('modalAdvice');
+            const modalHeader = document.querySelector('.modal-header');
+            
+            if (result == 1) {
+                modalTitle.textContent = 'High Risk Detected';
+                modalIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
+                modalMessage.textContent = 'Our analysis indicates a high risk of heart disease.';
+                modalAdvice.textContent = 'Please consult with a healthcare professional for a thorough evaluation and personalized treatment plan.';
+                modalHeader.className = 'modal-header high-risk';
+            } else {
+                modalTitle.textContent = 'Low Risk Detected';
+                modalIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+                modalMessage.textContent = 'Great news! Our analysis indicates a low risk of heart disease.';
+                modalAdvice.textContent = 'Continue maintaining your healthy lifestyle with regular exercise and a balanced diet.';
+                modalHeader.className = 'modal-header low-risk';
+            }
+            
+            const bootstrapModal = new bootstrap.Modal(modal);
+            bootstrapModal.show();
+        }
     </script>
 </body>
 </html>

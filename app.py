@@ -1,13 +1,13 @@
 from flask import Flask, request, render_template, send_from_directory
 import os
 
-from src.pipeline.predict_pipeline import CustomData
-from src.pipeline.predict_pipeline import PredictPipeline
+from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 from src.logger import logging
 from src.database.db_handler import DatabaseHandler  
 
 application = Flask(__name__)
 app = application
+app.secret_key = 'your-secret-key-here-change-in-production'
 
 db_handler = DatabaseHandler('predictions.db')  
 
@@ -46,7 +46,7 @@ def predict_data():
         
         # Save prediction to database only
         db_handler.save_prediction(pred_df, results[0])
-            
+        
         return render_template('home.html', results=results[0])
 
 @app.route('/data')

@@ -113,18 +113,36 @@ pip install -r requirements.txt
 
 ## Model Development
 
-The project evaluates multiple classification algorithms including:
-- Random Forest
-- Logistic Regression
-- Gradient Boosting
-- XGBoost
-- CatBoost
-- SVM
-- Decision Tree
-- K-Nearest Neighbors
-- AdaBoost
+The project evaluates multiple classification algorithms and compares their performance using F1-score as the primary metric.
 
-Models are compared using metrics such as accuracy, precision, recall, F1-score, and ROC-AUC to select the best performer for heart disease prediction.
+### Model Performance (F1-Scores)
+
+| Model | F1-Score |
+|-------|----------|
+| **CatBoost Classifier** | **0.9057** |
+| Gradient Boost Classifier | 0.8952 |
+| Random Forest Classifier | 0.8857 |
+| XGB Classifier | 0.8910 |
+| AdaBoost Classifier | 0.8835 |
+| K-Neighbors Classifier | 0.8738 |
+| Logistic Regression | 0.8696 |
+| Decision Tree Classifier | 0.8177 |
+
+### Best Model Performance
+
+**CatBoost Classifier** achieved the highest performance with:
+- **F1-Score**: 0.8846
+- **AUPRC (Area Under Precision-Recall Curve)**: 0.8647
+
+The CatBoost Classifier was selected as the final model for deployment due to its superior performance in handling categorical features and robust prediction accuracy for heart disease classification.
+
+### Model Selection Criteria
+
+Models were evaluated using:
+- **F1-Score**: Harmonic mean of precision and recall
+- **AUPRC**: Area Under Precision-Recall Curve
+- **Cross-validation**: 5-fold cross-validation for robust evaluation
+- **Hyperparameter tuning**: GridSearchCV for optimal parameters
 
 ## Web Application
 

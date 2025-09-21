@@ -9,7 +9,7 @@ from sklearn.ensemble import (
     RandomForestClassifier
 )
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score,average_precision_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
@@ -113,7 +113,8 @@ class ModelTrainer:
                 predicted = best_model.predict(X_test)
 
                 f1_Score_value = f1_score(Y_test,predicted)
-            return f1_Score_value
+                auprc = average_precision_score(Y_test, predicted)
+            return f1_Score_value,auprc,best_model_name
 
         except Exception as e:
             raise CustomException(e,sys)        
